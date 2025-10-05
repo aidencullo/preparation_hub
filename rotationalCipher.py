@@ -2,6 +2,10 @@ import math
 # Add any extra import statements you may need here
 import string
 
+DIGITS = string.digits
+UPPERCASE = string.ascii_uppercase
+LOWERCASE = string.ascii_lowercase
+
 def rotationalCipher(input_str, rotation_factor):
   # Write your code here
     from functools import partial
@@ -22,27 +26,27 @@ def process_alphanumeric_char(c, rotation_factor):
         return process_lower(c, rotation_factor)
 
 def process_digit(c, rotation_factor):
-    digits = string.digits
-    n = len(digits)
-    index = digits.index(c)
-    new_index = (index + rotation_factor) % n
-    return digits[new_index]
+    n = len(DIGITS)
+    index = DIGITS.index(c)
+    new_index = calculate_new_index(index, rotation_factor, n)
+    return DIGITS[new_index]
 
 
 def process_upper(c, rotation_factor):
-    all_uppercase = string.ascii_uppercase
-    n = len(all_uppercase)
-    index = all_uppercase.index(c)
-    new_index = (index + rotation_factor) % n
-    return all_uppercase[new_index]
+    n = len(UPPERCASE)
+    index = UPPERCASE.index(c)
+    new_index = calculate_new_index(index, rotation_factor, n)
+    return UPPERCASE[new_index]
 
 def process_lower(c, rotation_factor):
-    all_lowercase = string.ascii_lowercase
-    n = len(all_lowercase)
-    index = all_lowercase.index(c)
-    new_index = (index + rotation_factor) % n
-    return all_lowercase[new_index]
+    n = len(LOWERCASE)
+    index = LOWERCASE.index(c)
+    new_index = calculate_new_index(index, rotation_factor, n)
+    return LOWERCASE[new_index]
 
+
+def calculate_new_index(index, rotation_factor, n):
+    return (index + rotation_factor) % n
 
 
 # These are the tests we use to determine if the solution is correct.
