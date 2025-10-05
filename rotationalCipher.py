@@ -1,11 +1,47 @@
 import math
 # Add any extra import statements you may need here
-
+import string
 
 def rotationalCipher(input_str, rotation_factor):
   # Write your code here
+    from functools import partial
+    process = partial(process_char, rotation_factor=rotation_factor)
+    return ''.join(list(map(process, input_str)))
+
+def process_char(c, rotation_factor):
+    if c.isalnum():
+        return process_alphanumeric_char(c, rotation_factor)
+    return c
+
+def process_alphanumeric_char(c, rotation_factor):
+    if c.isdigit():
+        return process_digit(c, rotation_factor)
+    if c.isupper():
+        return process_upper(c, rotation_factor)
+    if c.islower():
+        return process_lower(c, rotation_factor)
+
+def process_digit(c, rotation_factor):
+    digits = string.digits
+    n = len(digits)
+    index = digits.index(c)
+    new_index = (index + rotation_factor) % n
+    return digits[new_index]
 
 
+def process_upper(c, rotation_factor):
+    all_uppercase = string.ascii_uppercase
+    n = len(all_uppercase)
+    index = all_uppercase.index(c)
+    new_index = (index + rotation_factor) % n
+    return all_uppercase[new_index]
+
+def process_lower(c, rotation_factor):
+    all_lowercase = string.ascii_lowercase
+    n = len(all_lowercase)
+    index = all_lowercase.index(c)
+    new_index = (index + rotation_factor) % n
+    return all_lowercase[new_index]
 
 
 
