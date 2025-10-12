@@ -7,14 +7,13 @@ from collections import Counter
 
 def matching_pairs(s, t):
   # Write your code here
-    if len(s) != len(t):
-        return False 
-    if Counter(s) != Counter(t):
-        return False
-    different = sum(1 if s[i] != t[i] else 0 for i in range(len(s)))
-    if different == 0 and len(set(s)) == len(s):
-        return False
-    return True
+    if Counter(s) == Counter(t):
+      different = sum(1 if s[i] != t[i] else 0 for i in range(len(s)))
+      if different == 0 and len(set(s)) == len(s):
+          return len(s) - 2
+      else:
+          return len(s)
+    return 0
  
 
 
