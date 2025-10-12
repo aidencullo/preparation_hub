@@ -1,13 +1,24 @@
 import math
 # Add any extra import statements you may need here
-
+from collections import Counter
+import math
 
 # Add any helper functions you may need here
 
 
 def min_length_substring(s, t):
   # Write your code here
-  
+    t_counter = Counter(t)
+    subarray_counter = Counter()
+    min_length = math.inf
+    l = 0
+    for i, x in enumerate(s):
+        subarray_counter[x] += 1
+        while dict(t_counter).items() <= dict(subarray_counter).items():
+            min_length = min(min_length, i - l + 1)
+            subarray_counter[s[l]] -= 1
+            l += 1
+    return min_length if min_length != math.inf else -1
   
 
 
