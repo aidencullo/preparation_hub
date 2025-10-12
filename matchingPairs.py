@@ -1,14 +1,21 @@
 import math
 # Add any extra import statements you may need here
-
+from collections import Counter
 
 # Add any helper functions you may need here
 
 
 def matching_pairs(s, t):
   # Write your code here
-  
-  
+    if len(s) != len(t):
+        return False 
+    if Counter(s) != Counter(t):
+        return False
+    different = sum(1 if s[i] != t[i] else 0 for i in range(len(s)))
+    if different == 0 and len(set(s)) == len(s):
+        return False
+    return True
+ 
 
 
 
